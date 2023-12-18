@@ -2,7 +2,6 @@ package com.sparta.board_plus.controller;
 
 import com.sparta.board_plus.dto.CommonResponseDTO;
 import com.sparta.board_plus.dto.UserRequestDTO;
-import com.sparta.board_plus.repository.UserRepository;
 import com.sparta.board_plus.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
