@@ -3,9 +3,11 @@ package com.sparta.board_plus.controller;
 
 import com.sparta.board_plus.dto.CommonResponseDTO;
 import com.sparta.board_plus.dto.PostRequestDTO;
+import com.sparta.board_plus.dto.PostResponseDTO;
 import com.sparta.board_plus.security.UserDetailsImpl;
 import com.sparta.board_plus.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -26,6 +28,19 @@ public class PostContoller {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(new CommonResponseDTO(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
         }
+    }
+
+    // 관심 상품 조회하기
+    @GetMapping
+    public Page<PostResponseDTO> getPosts(
+            @RequestParam("page") int page,
+            @RequestParam("size") int size,
+            @RequestParam("sortBy") String sortBy,
+            @RequestParam("isAsc") boolean isAsc,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+        // 응답 보내기
+        return postService.getPosts(userDetails.getUser(),
+                page-1, size, sortBy, isAsc);
     }
 
     @GetMapping("/{postId}")
