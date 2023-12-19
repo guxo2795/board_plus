@@ -79,13 +79,13 @@ public class PostService {
     }
 
     // 게시물 존재 유무 확인
-    private Post findPost(Long postId) {
+    public Post findPost(Long postId) {
         return postRepository.findById(postId)
                 .orElseThrow(() -> new IllegalArgumentException("게시물이 존재하지 않습니다."));
     }
 
     // 게시물 존재 유무 확인 및 유저 확인
-    private Post findPostUser(Long postId, UserDetailsImpl userDetails) {
+    public Post findPostUser(Long postId, UserDetailsImpl userDetails) {
         Post post = findPost(postId);
 
         boolean isAdmin = userDetails.getUser().getRole().equals(UserRoleEnum.ADMIN);
