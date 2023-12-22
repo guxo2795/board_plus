@@ -30,7 +30,7 @@ public class PostContoller {
         }
     }
 
-    // 관심 상품 조회하기
+    // 게시물 페이징 조회
     @GetMapping
     public Page<PostResponseDTO> getPosts(
             @RequestParam("page") int page,
@@ -43,6 +43,7 @@ public class PostContoller {
                 page-1, size, sortBy, isAsc);
     }
 
+    // 게시물 단건 조회
     @GetMapping("/{postId}")
     public ResponseEntity<CommonResponseDTO> getPost(@PathVariable Long postId) {
         try {
@@ -52,6 +53,7 @@ public class PostContoller {
         }
     }
 
+    // 게시물 수정
     @PatchMapping("/{postId}")
     public ResponseEntity<CommonResponseDTO> updatePost(@PathVariable Long postId, @RequestBody PostRequestDTO postRequestDTO, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
@@ -62,6 +64,7 @@ public class PostContoller {
         }
     }
 
+    // 게시물 삭제
     @DeleteMapping("/{postId}")
     public ResponseEntity<CommonResponseDTO> deletePost(@PathVariable Long postId, @AuthenticationPrincipal UserDetailsImpl userDetails) {
         try {
